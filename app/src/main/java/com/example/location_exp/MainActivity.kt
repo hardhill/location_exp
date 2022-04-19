@@ -9,17 +9,15 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.LocationOn
 import androidx.compose.material.icons.outlined.Settings
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.location_exp.ui.theme.Location_expTheme
-import com.example.location_exp.ui.theme.Purple500
 
 var txt = "Hello World"
 
@@ -62,20 +60,24 @@ fun MainScreen() {
 
 @Composable
 fun MyBottomNavigationBar() {
+    var txtLocation by rememberSaveable() { mutableStateOf(vlocation(0.0, 0.0).text) }
     BottomNavigation(
         backgroundColor = Color.DarkGray,
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             IconButton(onClick = { }, content = {
-                Icon(imageVector = Icons.Outlined.LocationOn, contentDescription = "Location",
-                tint = Color.White)
+                Icon(
+                    imageVector = Icons.Outlined.LocationOn, contentDescription = "Location",
+                    tint = Color.White
+                )
             })
-            Text(text = txt)
+            Text(text = txtLocation)
         }
 
 
     }
 }
+
 
 @Composable
 fun MyDrawerContent() {
